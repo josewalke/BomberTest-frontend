@@ -31,7 +31,7 @@ export const state = () => ({
   provincia: '',
   f_categoria: '',
   f_tema: ''
-})
+}
 
 export const getters = {
   nickName(state) {
