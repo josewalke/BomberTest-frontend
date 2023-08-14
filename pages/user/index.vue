@@ -41,23 +41,23 @@
           <v-card-title>
             <h4>Pago de Suscripción BASIC</h4>
           </v-card-title>
-          Sentimos comunicar que actualmente tenemos problemas con el metodo de pago por favor pongase en contacto con el docente para realizar el pago.
-          <!-- <StripeBasic></StripeBasic> -->
+          <!-- Sentimos comunicar que actualmente tenemos problemas con el metodo de pago por favor pongase en contacto con el docente para realizar el pago. -->
+          <StripeBasic></StripeBasic>
         </v-card>
         <v-card v-if="suscription_type === 'pro'">
           <v-card-title>
             <h4>Pago de Suscripción PRO</h4>
           </v-card-title>
-          Sentimos comunicar que actualmente tenemos problemas con el metodo de pago por favor pongase en contacto con el docente para realizar el pago.
-          <!-- <StripePro></StripePro> -->
+          <!-- Sentimos comunicar que actualmente tenemos problemas con el metodo de pago por favor pongase en contacto con el docente para realizar el pago. -->
+          <StripePro></StripePro>
         </v-card>
         <v-card v-if="suscription_type === 'premium'">
           <v-card-title>
             <h4>Pago de Suscripción PREMIUM</h4>
           </v-card-title>
-          Sentimos comunicar que actualmente tenemos problemas con el metodo de pago por favor pongase en contacto con el docente
-          para realizar el pago.
-          <!-- <StripePremium></StripePremium> -->
+          <!-- Sentimos comunicar que actualmente tenemos problemas con el metodo de pago por favor pongase en contacto con el docente
+          para realizar el pago. -->
+          <StripePremium></StripePremium>
         </v-card>
       </v-col>
       <v-col v-if="formato != 'ordenador'" cols="10" offset="1">
