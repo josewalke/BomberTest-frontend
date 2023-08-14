@@ -16,6 +16,7 @@
 <script>
 import API from '~/services/api'
 import { mapGetters } from 'vuex'
+import { loadStripe } from '@stripe/stripe-js';
 
 export default {
   data() {
@@ -49,7 +50,8 @@ export default {
   },
   methods: {
     async setUpStripe() {
-      this.stripe = this.$stripe.import()
+      //this.stripe = this.$stripe.import()
+      this.stripe = await loadStripe('pk_live_daV3xXufvrqBergi5COkEfDq006p5cYVBR')
 
       this.clientSecret = (await API.paymentBasic()).client_secret
 
