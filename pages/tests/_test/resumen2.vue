@@ -130,10 +130,9 @@ export default {
     const result = await API.getTest(store.state.currentTest._id)
     console.log(result)
     result.no_contestadas.forEach(item => {
-      console.log(item)
-      question.push(item.enunciado)
+      question.push(item)
     })
-    // console.log(question)
+    console.log(question)
     const temas = await API.getAllTemasNames()
     return { temas, question }
   },
