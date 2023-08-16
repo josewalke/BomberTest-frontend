@@ -132,7 +132,6 @@ export default {
     result.no_contestadas.forEach(item => {
       question.push(item)
     })
-    console.log(question)
     const temas = await API.getAllTemasNames()
     return { temas, question }
   },
