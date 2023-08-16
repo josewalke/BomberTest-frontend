@@ -126,9 +126,7 @@ export default {
   components: { Donut },
   async asyncData({ store }) {
     const question = []
-    console.log(store.state.currentTest)
     const result = await API.getTest(store.state.currentTest._id)
-    console.log(result)
     result.no_contestadas.forEach(item => {
       question.push(item)
     })
