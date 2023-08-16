@@ -389,7 +389,7 @@ export const actions = {
     let data = testData
     const updatedTest = await API.updateTest(state.token, data)
     if (!updatedTest.error) {
-      const tests = await API.getAllTest(state.userId)
+      const tests = await API.getAllTestById(state.userId)
       commit('saveTests', tests)
     }
   },
