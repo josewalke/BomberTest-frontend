@@ -125,14 +125,14 @@ import Donut from '~/components/Doughnut.js'
 export default {
   components: { Donut },
   async asyncData({ store }) {
-    var question = []
-    for (let i = 0; i < store.state.currentTest.no_contestadas.length; i++) {
-      let body = {
-        _id: store.state.currentTest.no_contestadas[i]
-      }
-      let pregunta = await API.getQuestion(body)
-      question.push(pregunta[0])
-    }
+    const question = []
+    console.log(store.state.currentTest)
+    const result = await API.getTest(store.state.currentTest._id)
+    console.log(result)
+    result.no_contestadas.forEach(item => {
+      console.log(item)
+      question.push(item.enunciado)
+    })
     // console.log(question)
     const temas = await API.getAllTemasNames()
     return { temas, question }
