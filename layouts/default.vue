@@ -171,6 +171,7 @@ export default {
       items: [
         { title: 'Perfil', icon: 'mdi-account', page: '/user' },
         { title: 'Test', icon: 'mdi-ballot', page: '/tests' },
+        { title: 'Videos', icon: 'mdi-video-box', page: '/videos' },
         { title: 'Mensajes', icon: 'mdi-email', page: '/message' },
         {
           title: 'Clasificatoria',
@@ -183,6 +184,7 @@ export default {
       admin: [
         { title: 'Alumnos', icon: 'mdi-account', page: '/dashboard' },
         { title: 'Temas', icon: 'mdi-book-open', page: '/temas' },
+        { title: 'Videos', icon: 'mdi-video-box', page: '/videos' },
         { title: 'PDF', icon: 'mdi-application-import', page: '/pdf' },
         { title: 'Mensajes', icon: 'mdi-email', page: '/message' },
         { title: 'Preguntas', icon: 'mdi-playlist-edit', page: '/question' },
