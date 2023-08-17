@@ -420,5 +420,8 @@ export default {
   },
   myCurrentTest(data) {
     return axios.get('tests/prueba/' + data).then(response => response.data)
+  },
+  getAllVideos(token) {
+    return axios.get('video', { headers: { token } }).then(response => response.data)
   }
 }

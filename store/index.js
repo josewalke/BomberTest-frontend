@@ -690,6 +690,10 @@ export const actions = {
     let temas = await API.AllTemas()
     console.log(temas)
   },
+  async getAllVideos(ctx, token) {
+    const result = await API.getAllVideos(token)
+    return result
+  },
   async prueba() {
     console.log('FUCK')
     // const currentTest = await API.getByTestId(.testId)
