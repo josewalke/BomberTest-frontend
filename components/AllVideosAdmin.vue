@@ -1,32 +1,51 @@
 <template>
   <div>
     <h1>Gestionar Vídeos</h1>
-    <div v-for="(item, idx) in list" :key="idx">
-      <VideoCard :video="item" :topicList="topics" />
+    <div class="new-video">
+      <span class="text-h5">Crear nuevo vídeo</span>
+      <v-btn
+        color="success"
+        @click="createVideo"  
+      >
+        Crear
+      </v-btn>
     </div>
+    <div v-for="(item, idx) in videos" :key="idx">
+      <VideoCard :video="item" />
+    </div>
+    <VideoDialog :visible="showDialog" @close="closeDialog" @reload="getVideos" />
   </div>
 </template>
 
 <script>
   import VideoCard from './VideoCard.vue'
+  import VideoDialog from './VideoDialog.vue'
 
   export default {
-    props: {
-      list: {
-        type: Array
-      }
-    },
     components: {
       VideoCard,
+      VideoDialog
     },
     data() {
       return {
-        topics: []
+        showDialog: false,
+        videos: []
       }
     },
-    async mounted() {
-      const result = await this.$store.dispatch('getAllTemas')
-      this.topics = result
+    methods: {
+      createVideo() {
+        this.showDialog = true
+      },
+      closeDialog() {
+        this.showDialog = false
+      },
+      async getVideos() {
+        const result = await this.$store.dispatch('getAllVideos')
+        this.videos = result
+      }
+    },
+    created() {
+      this.getVideos()
     }
   }
 </script>

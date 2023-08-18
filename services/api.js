@@ -424,8 +424,18 @@ export default {
   getAllVideos(token) {
     return axios.get('video', { headers: { token } }).then(response => response.data)
   },
+  async createVideo(body, token) {
+    const result = await axios.post('/video', body, {
+      headers: {
+        token
+      }
+    })
+  },
   async updateVideo(body, token) {
-    const result = await axios.put(`video/${body.id}`, body.body, { headers: { token } })
+    const result = await axios.put(`video/${body.id}`, body.body, {
+      headers: { token
+      } 
+    })
     return result.data
   }
 }

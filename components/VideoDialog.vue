@@ -2,7 +2,8 @@
   <v-dialog :value="visible" @input="close" max-width="500px">
     <v-card>
       <v-card-title>
-        <span class="text-h5">Editar Vídeo</span>
+        <!-- Si recibe el prop 'video', es que estamos editando un vídeo existente. Si no, estamos creando un vídeo nuevo -->
+        <span class="text-h5">{{video ? 'Editar Vídeo' : 'Crear Vídeo'}}</span>
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
@@ -34,8 +35,8 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-        <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+        <v-btn color="blue darken-1" text @click="close"> Cancelar </v-btn>
+        <v-btn color="blue darken-1" text @click="save"> Guardar </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -50,46 +51,56 @@ export default {
     },
     video: {
       type: Object
-    },
-    topics: {
-      type: Array
     }
   },
   data () {
     return {
       editedInfo: {
-        title: this.video.title,
-        topic: this.video.topic.name,
-        url: this.video.url
+        title: this.video ? this.video.title : '',
+        topic: this.video ? this.video.topic.name : this.topics,
+        url: this.video ? this.video.url : ''
       },
+      topics: [],
       topicNames: []
     }
   },
   methods: {
     close() {
-      this.editedInfo = {
-        title: this.video.title,
-        topic: this.video.topic.name,
-        url: this.video.url
+      if (this.video) {
+        this.editedInfo = {
+          title: this.video.title,
+          topic: this.video.topic.name,
+          url: this.video.url
+        }
+      } else {
+        this.editedInfo = {
+          title: '',
+          topic: this.topicNames[0],
+          url: ''
+        }
       }
       this.$emit('close')
     },
     async save() {
       const topic = this.topics.filter(topic => topic.name === this.editedInfo.topic)[0]
       this.editedInfo.topic = topic._id
-      await this.$store.dispatch('updateVideo', {id: this.video._id, body: this.editedInfo})
-
-      this.video.title = this.editedInfo.title
-      this.video.topic.name = topic.name
-      this.video.topic.category = topic.category
+      if (this.video) {
+        await this.$store.dispatch('updateVideo', {id: this.video._id, body: this.editedInfo})
+  
+        this.video.title = this.editedInfo.title
+        this.video.topic.name = topic.name
+        this.video.topic.category = topic.category
+      } else {
+        await this.$store.dispatch('createVideo', this.editedInfo)
+        this.$emit('reload')
+      }
 
       this.$emit('close')
-    },
-    getTopic() {
-      return this.video.topic ? this.video.topic.name : '' //cambiarlo a computed
     }
   },
-  mounted () {
+  async created() {
+    const result = await this.$store.dispatch('getAllTemas')
+    this.topics = result
     this.topicNames = this.topics.map(topic => topic.name)
   },
   watch: {

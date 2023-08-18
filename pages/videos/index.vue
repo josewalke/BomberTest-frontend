@@ -1,6 +1,6 @@
 <template>
   <div v-if="role === 'admin'" class="video-list">
-     <AllVideosAdmin :list="videos" />
+     <AllVideosAdmin />
   </div>
   <div v-else>
     User Videos
@@ -15,23 +15,10 @@
     components: {
       AllVideosAdmin
     },
-    data () {
-      return {
-        videos: [],
-      }
-    },
     computed: {
       ...mapGetters([
         'role'
       ])
-    },
-    async mounted () {
-      try {
-        const result = await this.$store.dispatch('getAllVideos')
-        this.videos = result
-      } catch (error) {
-        throw new Error (error)
-      }
     }
   }
 </script>

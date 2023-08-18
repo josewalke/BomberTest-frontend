@@ -59,24 +59,21 @@
       </v-btn>
       <v-spacer />
     </v-card-actions>
-    <EditDialog :video="video" :visible="showDialog" :topics="topicList" @close="closeDialog" />
+    <VideoDialog :video="video" :visible="showDialog" @close="closeDialog" />
   </v-card>
 </template>
 
 <script>
-  import EditDialog from './EditDialog.vue'
+  import VideoDialog from './VideoDialog.vue'
 
   export default {
     props: {
       video: {
         type: Object
-      },
-      topicList: {
-        type: Array
       }
     },
     components: {
-      EditDialog
+      VideoDialog
     },
     data () {
       return {

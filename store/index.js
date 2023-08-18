@@ -693,6 +693,9 @@ export const actions = {
     const result = await API.getAllVideos(ctx.getters.token)
     return result
   },
+  async createVideo(ctx, data) {
+    return await API.createVideo(data, ctx.getters.token)
+  },
   async updateVideo(ctx, data) {
     const result = await API.updateVideo(data, ctx.getters.token)
     return result
