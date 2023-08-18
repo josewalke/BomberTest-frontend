@@ -3,17 +3,19 @@
      <AllVideosAdmin />
   </div>
   <div v-else>
-    User Videos
+    <AllVideosUser />
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
   import AllVideosAdmin from '../../components/AllVideosAdmin.vue'
+  import AllVideosUser from '../../components/AllVideosUser.vue'
 
   export default {
     components: {
-      AllVideosAdmin
+      AllVideosAdmin,
+      AllVideosUser
     },
     computed: {
       ...mapGetters([

@@ -430,6 +430,7 @@ export default {
         token
       }
     })
+    return result.data
   },
   async updateVideo(body, token) {
     const result = await axios.put(`video/${body.id}`, body.body, {
