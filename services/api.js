@@ -437,5 +437,13 @@ export default {
       } 
     })
     return result.data
+  },
+  async deleteVideo(id, token) {
+    const result = await axios.delete(`video/${id}`, {
+      headers: {
+        token
+      }
+    })
+    return result.data
   }
 }

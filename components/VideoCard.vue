@@ -48,7 +48,7 @@
         rounded
         text
         class="red"
-        @click="deleteVideo"
+        @click="openDelete"
       >
         Borrar
         <v-icon
@@ -60,11 +60,13 @@
       <v-spacer />
     </v-card-actions>
     <VideoDialog :video="video" :visible="showDialog" @close="closeDialog" />
+    <DeleteAlert :id="video._id" :visible="showDelete" @close="closeDelete" @reload="reload" />
   </v-card>
 </template>
 
 <script>
   import VideoDialog from './VideoDialog.vue'
+  import DeleteAlert from './DeleteAlert.vue'
 
   export default {
     props: {
@@ -73,11 +75,13 @@
       }
     },
     components: {
-      VideoDialog
+      VideoDialog,
+      DeleteAlert
     },
     data () {
       return {
-        showDialog: false
+        showDialog: false,
+        showDelete: false
       }
     },
     methods: {
@@ -87,11 +91,17 @@
       editVideo() {
         this.showDialog = true
       },
-      deleteVideo() {
-        console.log('Borrar')
-      },
       closeDialog() {
         this.showDialog = false
+      },
+      openDelete() {
+        this.showDelete = true
+      },
+      closeDelete() {
+        this.showDelete = false
+      },
+      reload() {
+        this.$emit('reload')
       }
     }
     

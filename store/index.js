@@ -700,6 +700,9 @@ export const actions = {
     const result = await API.updateVideo(data, ctx.getters.token)
     return result
   },
+  async deleteVideo(ctx, id) {
+    return await API.deleteVideo(id, ctx.getters.token)
+  },
   async prueba() {
     console.log('FUCK')
     // const currentTest = await API.getByTestId(.testId)

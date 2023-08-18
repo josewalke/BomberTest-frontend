@@ -11,7 +11,7 @@
       </v-btn>
     </div>
     <div v-for="(item, idx) in videos" :key="idx">
-      <VideoCard :video="item" />
+      <VideoCard :video="item" @reload="getVideos" />
     </div>
     <VideoDialog :visible="showDialog" @close="closeDialog" @reload="getVideos" />
   </div>
