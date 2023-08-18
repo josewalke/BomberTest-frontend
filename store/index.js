@@ -686,12 +686,15 @@ export const actions = {
     commit('filtro_search', data)
   },
   async getAllTemas({ commit }) {
-    commit('prueba')
-    let temas = await API.AllTemas()
-    console.log(temas)
+    let temas = await API.getAllTemas()
+    return temas
   },
-  async getAllVideos(ctx, token) {
-    const result = await API.getAllVideos(token)
+  async getAllVideos(ctx) {
+    const result = await API.getAllVideos(ctx.getters.token)
+    return result
+  },
+  async updateVideo(ctx, data) {
+    const result = await API.updateVideo(data, ctx.getters.token)
     return result
   },
   async prueba() {

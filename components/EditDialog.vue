@@ -7,26 +7,28 @@
       <v-divider></v-divider>
       <v-card-text>
         <v-container>
-          <v-row>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                v-model="editedItem.title"
-                label="Título"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                v-model="editedItem.topic"
-                label="Tema"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                v-model="editedItem.url"
-                label="URL"
-              ></v-text-field>
-            </v-col>
-          </v-row>
+          <v-col cols="12">
+            <v-text-field
+              outlined
+              v-model="editedInfo.title"
+              label="Título"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-select
+              outlined
+              v-model="editedInfo.topic"
+              :items="topicNames"
+              label="Tema"
+            ></v-select>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              outlined
+              v-model="editedInfo.url"
+              label="URL"
+            ></v-text-field>
+          </v-col>
         </v-container>
       </v-card-text>
 
@@ -45,28 +47,50 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    },
+    video: {
+      type: Object
+    },
+    topics: {
+      type: Array
     }
   },
-  data: () => ({
-    editedItem: {
-      title: 'Sin título',
-      topic: '',
-      url: ''
+  data () {
+    return {
+      editedInfo: {
+        title: this.video.title,
+        topic: this.video.topic.name,
+        url: this.video.url
+      },
+      topicNames: []
     }
-  }),
+  },
   methods: {
-    // showDialog() {
-    //   this.$emit('show', !this.visible)
-    // },
     close() {
+      this.editedInfo = {
+        title: this.video.title,
+        topic: this.video.topic.name,
+        url: this.video.url
+      }
       this.$emit('close')
     },
-    save() {
-      console.log('Hago cosas')
+    async save() {
+      const topic = this.topics.filter(topic => topic.name === this.editedInfo.topic)[0]
+      this.editedInfo.topic = topic._id
+      await this.$store.dispatch('updateVideo', {id: this.video._id, body: this.editedInfo})
+
+      this.video.title = this.editedInfo.title
+      this.video.topic.name = topic.name
+      this.video.topic.category = topic.category
+
+      this.$emit('close')
     },
-    // handleDialogInput() {
-    //   this.$emit('update:visible', value)
-    // },
+    getTopic() {
+      return this.video.topic ? this.video.topic.name : '' //cambiarlo a computed
+    }
+  },
+  mounted () {
+    this.topicNames = this.topics.map(topic => topic.name)
   },
   watch: {
     visible(newValue) {
