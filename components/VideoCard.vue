@@ -86,7 +86,8 @@
     },
     methods: {
       playVideo() {
-        console.log(this.video.url)
+        this.$store.commit('saveVideo', this.video)
+        this.$router.push(`/videos/${this.video._id}`)
       },
       editVideo() {
         this.showDialog = true

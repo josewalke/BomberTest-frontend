@@ -30,7 +30,8 @@ export const state = () => ({
   test_id: '',
   provincia: '',
   f_categoria: '',
-  f_tema: ''
+  f_tema: '',
+  video: {}
 })
 
 export const getters = {
@@ -123,6 +124,9 @@ export const getters = {
   },
   V_tema(state) {
     return state.f_tema
+  },
+  video(state) {
+    return state.video
   }
 }
 
@@ -327,6 +331,9 @@ export const mutations = {
     if (data.f_tema.length > 0) {
       state.f_tema = data.f_tema
     }
+  },
+  saveVideo(state, data) {
+    state.video = data
   }
 }
 

@@ -51,6 +51,7 @@
     "vue-pdf-renderer": "^1.0.1",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
+    "vue-youtube-embed": "^2.2.2",
     "vuex-persistedstate": "^4.1.0",
     "w3-css": "^4.1.0"
   },
