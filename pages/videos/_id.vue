@@ -27,7 +27,6 @@ import { mapGetters } from 'vuex'
       ])
     },
     created() {
-      console.log(this.video.url)
       this.extractVideoId(this.video.url)
     },
   }
