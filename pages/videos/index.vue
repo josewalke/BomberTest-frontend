@@ -1,26 +1,15 @@
 <template>
-  <div v-if="role === 'admin'" class="video-list">
-     <AllVideosAdmin />
-  </div>
-  <div v-else>
-    <AllVideosUser />
+  <div>
+    <AllVideos />
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-  import AllVideosAdmin from '../../components/AllVideosAdmin.vue'
-  import AllVideosUser from '../../components/AllVideosUser.vue'
+  import AllVideos from '../../components/AllVideos.vue'
 
   export default {
     components: {
-      AllVideosAdmin,
-      AllVideosUser
-    },
-    computed: {
-      ...mapGetters([
-        'role'
-      ])
+      AllVideos
     }
   }
 </script>

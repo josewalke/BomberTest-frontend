@@ -41,8 +41,7 @@ module.exports = {
   plugins: [
     { src: '~/plugins/localStorage.js', ssr: false },
     { src: '~/plugins/vue-css-donut-chart.js', ssr: false },
-    { src: '~/plugins/vue-css-donut-chart.js', ssr: false },
-    { src: '~/plugins/youtube.js', ssr: false }
+    { src: '~/plugins/vue-css-donut-chart.js', ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules
