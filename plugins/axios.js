@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'http://localhost:2222/api/'
+  baseURL: 'https://bomber-test-backend-production.up.railway.app/api/'
 })
