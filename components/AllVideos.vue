@@ -54,7 +54,8 @@ export default {
         return;
       }
       const topics = await this.$store.dispatch('getAllTemas')
-      this.topics = topics
+      topics.sort((a,b) => a.name.localeCompare(b.name))
+      this.topics = topics.filter(topic => topic.visible)
       this.getCategories()
     },
     getCategories() {
