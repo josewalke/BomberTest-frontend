@@ -31,7 +31,8 @@ export const state = () => ({
   provincia: '',
   f_categoria: '',
   f_tema: '',
-  video: {}
+  video: {},
+  file: {}
 })
 
 export const getters = {
@@ -127,6 +128,9 @@ export const getters = {
   },
   video(state) {
     return state.video
+  },
+  file(state) {
+    return state.file
   }
 }
 
@@ -334,6 +338,9 @@ export const mutations = {
   },
   saveVideo(state, data) {
     state.video = data
+  },
+  saveFile(state, data) {
+    state.file = data
   }
 }
 
@@ -709,6 +716,27 @@ export const actions = {
   },
   async deleteVideo(ctx, id) {
     return await API.deleteVideo(id, ctx.getters.token)
+  },
+  async getAllFiles(ctx) {
+    return await API.getAllFiles(ctx.getters.token)
+  },
+  async getAllPDF(ctx) {
+    return await API.getAllPDF(ctx.getters.token)
+  },
+  async getAllDownloads(ctx) {
+    return await API.getAllDownloads(ctx.getters.token)
+  },
+  async seeMedia(ctx, id) {
+    return await API.seeMedia(id, ctx.getters.token)
+  },
+  async postFile(ctx, data) {
+    return await API.postFile(data, ctx.getters.token)
+  },
+  async updateFile(ctx, data) {
+    return await API.updateFile(data, ctx.getters.token)
+  },
+  async deleteFile(ctx, id) {
+    return await API.deleteFile(id, ctx.getters.token)
   },
   async prueba() {
     console.log('FUCK')

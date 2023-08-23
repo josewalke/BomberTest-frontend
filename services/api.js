@@ -446,5 +446,38 @@ export default {
       }
     })
     return result.data
+  },
+  async getAllFiles(token) {
+    const result = await axios.get('file', { headers: { token } })
+    return result.data
+  },
+  async getAllPDF(token) {
+    const result = await axios.get('file/pdf', { headers: { token } })
+    return result.data
+  },
+  async getAllDownloads(token) {
+    const result = await axios.get('file/downloads', { headers: { token } })
+    return result.data
+  },
+  async seeMedia(id, token) {
+    const result = await axios.get(`file/media/${id}`, { headers: { token } })
+    return result.data
+  },
+  async postFile(body, token) {
+    const formData = new FormData()
+    for(let key in body) {
+      formData.append(key, body[key])
+    }
+
+    const result = await axios.post('file', formData, { headers: { token: token } })
+    return result.data
+  },
+  async updateFile(body, token) {
+    const result = await axios.put(`file/${body.id}`, body.body , { headers: { token } })
+    return result.data
+  },
+  async deleteFile(id, token) {
+    const result = await axios.delete(`file/${id}`, { headers: { token } })
+    return result.data
   }
 }

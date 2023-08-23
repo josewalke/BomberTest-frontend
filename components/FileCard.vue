@@ -1,15 +1,15 @@
 <template>
-  <v-card class="video-card mx-auto" outlined>
+  <v-card class="file-card mx-auto" outlined>
     <v-list-item three-line>
       <v-list-item-content>
         <v-list-item-title class="text-h5 mb-1">
-          {{ video.title }}
+          {{ file.title }}
         </v-list-item-title>
       </v-list-item-content>
 
       <v-card-actions v-if="role === 'admin'">
         <v-spacer />
-        <v-btn outlined rounded text class="primary white--text" @click="editVideo">
+        <v-btn outlined rounded text class="primary white--text" @click="editFile">
           Editar
           <v-spacer />
           <v-icon small class="mr-2"> mdi-pencil </v-icon>
@@ -20,16 +20,21 @@
         </v-btn>
         <v-spacer />
       </v-card-actions>
-      <VideoDialog :video="video" :visible="showDialog" @close="closeDialog" />
-      <DeleteAlert
-        :id="video._id"
+      <FileDialog :file="file" :visible="showDialog" @close="closeDialog" @reload="reload" />
+      <DeleteFileAlert
+        :id="file._id"
         :visible="showDelete"
         @close="closeDelete"
         @reload="reload"
       />
-      <v-icon size="70" class="play-icon mr-2" @click="playVideo">
-        mdi-play-circle-outline
+      <v-icon size="70" class="file-icon mr-2" @click="seeMedia">
+        mdi-eye-outline
       </v-icon>
+      <a ref="downloadLink" download>
+        <v-icon  size="70" class="file-icon mr-2" @click="downloadMedia(file._id)">
+          mdi-file-download-outline
+        </v-icon>
+      </a>
     </v-list-item>
 
   </v-card>
@@ -38,34 +43,42 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import VideoDialog from './VideoDialog.vue'
-import DeleteAlert from './DeleteAlert.vue'
+import FileDialog from './FileDialog.vue'
+import DeleteFileAlert from './DeleteFileAlert.vue'
 
 export default {
   props: {
-    video: {
+    file: {
       type: Object,
     },
   },
   components: {
-    VideoDialog,
-    DeleteAlert,
+    FileDialog,
+    DeleteFileAlert,
   },
   data() {
     return {
       showDialog: false,
-      showDelete: false,
+      showDelete: false
     }
   },
   computed: {
     ...mapGetters(['role'])
   },
   methods: {
-    playVideo() {
-      this.$store.commit('saveVideo', this.video)
-      this.$router.push(`/videos/${this.video._id}`)
+    seeMedia() {
+      this.$store.commit('saveFile', this.file)
+      this.$router.push(`/downloads/${this.file._id}`)
     },
-    editVideo() {
+    async downloadMedia(id) {
+      const fileData = await this.$store.dispatch('seeMedia', id)
+      const response = await fetch(fileData.url)
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      this.$refs.downloadLink.href = url
+      this.$refs.downloadLink.click()
+    },
+    editFile() {
       this.showDialog = true
     },
     closeDialog() {
@@ -85,17 +98,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.play-icon {
+.file-icon {
   color: lightskyblue;
 }
-.play-icon:hover {
+.file-icon:hover {
   background-color: #1976d2;
   border-radius: 10%;
 }
-.video-card {
+.file-card {
   border-color:#BBDEFB;
 }
-.video-card:hover {
+.file-card:hover {
   background-color:#BBDEFB;
 }
 </style>

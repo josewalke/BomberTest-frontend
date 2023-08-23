@@ -2,8 +2,7 @@
   <v-dialog :value="visible" @input="close" max-width="500px">
     <v-card>
       <v-card-title class="primary white--text">
-        <!-- Si recibe el prop 'video', es que estamos editando un vídeo existente. Si no, estamos creando un vídeo nuevo -->
-        <span class="text-h5">{{video ? 'Editar Vídeo' : 'Crear Vídeo'}}</span>
+        <span class="text-h5">{{file ? 'Editar Archivo' : 'Crear Archivo'}}</span>
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
@@ -23,13 +22,12 @@
               label="Tema"
             ></v-select>
           </v-col>
-          <v-col cols="12">
-            <v-text-field
-              outlined
-              v-model="editedInfo.url"
-              label="URL"
-            ></v-text-field>
+          <v-col cols="12" v-if="!file">
+            <div class="text-center">
+              <input type="file" @change="selectFile" class="download-btn">
+            </div>
           </v-col>
+          
         </v-container>
       </v-card-text>
 
@@ -49,16 +47,16 @@ export default {
       type: Boolean,
       default: false
     },
-    video: {
+    file: {
       type: Object
     }
   },
   data () {
     return {
       editedInfo: {
-        title: this.video ? this.video.title : '',
-        topic: this.video ? this.video.topic.name : this.topics,
-        url: this.video ? this.video.url : ''
+        title: this.file ? this.file.title : '',
+        topic: this.file ? this.file.topic.name : this.topics,
+        file: this.file ? this.file.cloudId : ''
       },
       topics: [],
       topicNames: []
@@ -66,17 +64,17 @@ export default {
   },
   methods: {
     close() {
-      if (this.video) {
+      if (this.file) {
         this.editedInfo = {
-          title: this.video.title,
-          topic: this.video.topic.name,
-          url: this.video.url
+          title: this.file.title,
+          topic: this.file.topic.name,
+          file: this.file.cloudId
         }
       } else {
         this.editedInfo = {
           title: '',
           topic: this.topicNames[0],
-          url: ''
+          file: ''
         }
       }
       this.$emit('close')
@@ -84,18 +82,21 @@ export default {
     async save() {
       const topic = this.topics.filter(topic => topic.name === this.editedInfo.topic)[0]
       this.editedInfo.topic = topic._id
-      if (this.video) {
-        await this.$store.dispatch('updateVideo', {id: this.video._id, body: this.editedInfo})
+      if (this.file) {
+        await this.$store.dispatch('updateFile', {id: this.file._id, body: this.editedInfo})
   
-        this.video.title = this.editedInfo.title
-        this.video.topic.name = topic.name
-        this.video.topic.category = topic.category
+        this.file.title = this.editedInfo.title
+        this.file.topic.name = topic.name
+        this.file.topic.category = topic.category
       } else {
-        await this.$store.dispatch('createVideo', this.editedInfo)
-        this.$emit('reload')
+        await this.$store.dispatch('postFile', this.editedInfo)
       }
 
+      this.$emit('reload')
       this.$emit('close')
+    },
+    async selectFile(e) {
+      this.editedInfo.file = e.target.files[0]
     }
   },
   async created() {
@@ -114,7 +115,7 @@ export default {
   }
 }
 </script>
-  
+
 <style lang="scss" scoped>
   .actions {
     background-color: #BBDEFB

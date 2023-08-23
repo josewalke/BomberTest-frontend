@@ -61,12 +61,19 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     'nuxt-fontawesome',
-    'nuxt-stripe-module'
+    'nuxt-stripe-module',
+    '@nuxtjs/cloudinary'
   ],
   stripe: {
     version: 'v3',
     publishableKey: 'pk_live_daV3xXufvrqBergi5COkEfDq006p5cYVBR'
     // publishableKey: 'pk_test_ezWwY83XHKU9CtONibdNYGXA00plca98gw'
+  },
+  cloudinary: {
+    cloudName: 'dcniczcdq',
+    api_key: '663893924416435',
+    api_secret: 'DexeevYnp1pwiQaHVzmtnp6ebxY',
+    useComponent: true
   },
   /*
    ** vuetify module configuration
@@ -95,14 +102,14 @@ module.exports = {
      */
     extend(config, ctx) {
       // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
+      // if (ctx.isDev && ctx.isClient) {
+      //   config.module.rules.push({
+      //     enforce: 'pre',
+      //     test: /\.(js|vue)$/,
+      //     loader: 'eslint-loader',
+      //     exclude: /(node_modules)/
+      //   })
+      // }
     }
   }
 }

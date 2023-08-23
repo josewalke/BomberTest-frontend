@@ -171,36 +171,39 @@ export default {
       items: [
         { title: 'Perfil', icon: 'mdi-account', page: '/user' },
         { title: 'Test', icon: 'mdi-ballot', page: '/tests' },
+        { title: 'Temario', icon: 'mdi-file-pdf-box', page: '/temario' },
         { title: 'Videos', icon: 'mdi-video-box', page: '/videos' },
+        { title: 'Descargas', icon: 'mdi-folder-download', page: '/descargas' },
         { title: 'Mensajes', icon: 'mdi-email', page: '/message' },
         {
           title: 'Clasificatoria',
           icon: 'mdi-playlist-star',
-          page: '/clasificacion'
+          page: '/clasificacion',
         },
-        { title: 'PDF', icon: 'mdi-application-import', page: '/viewPdf' },
-        { title: 'Configuración', icon: 'mdi-cogs', page: '/settings' }
+        ,
+        { title: 'Configuración', icon: 'mdi-cogs', page: '/settings' },
       ],
       admin: [
         { title: 'Alumnos', icon: 'mdi-account', page: '/dashboard' },
         { title: 'Temas', icon: 'mdi-book-open', page: '/temas' },
+        { title: 'PDF', icon: 'mdi-file-pdf-box', page: '/topics' },
         { title: 'Videos', icon: 'mdi-video-box', page: '/videos' },
-        { title: 'PDF', icon: 'mdi-application-import', page: '/pdf' },
+        { title: 'Descargas', icon: 'mdi-folder-download', page: '/downloads' },
         { title: 'Mensajes', icon: 'mdi-email', page: '/message' },
         { title: 'Preguntas', icon: 'mdi-playlist-edit', page: '/question' },
         { title: 'Test', icon: 'mdi-ballot', page: '/examen' },
         {
           title: 'Clasificatoria',
           icon: 'mdi-playlist-star',
-          page: '/clasificacion'
+          page: '/clasificacion',
         },
-        { title: 'Configuración', icon: 'mdi-cogs', page: '/settings2' }
+        { title: 'Configuración', icon: 'mdi-cogs', page: '/settings2' },
       ],
-      formato: ''
+      formato: '',
     }
   },
   computed: {
-    ...mapGetters(['userName', 'image_url', 'role'])
+    ...mapGetters(['userName', 'image_url', 'role']),
   },
   methods: {
     resolucion() {
@@ -217,9 +220,10 @@ export default {
     logout() {
       this.$store.commit('clearToken')
       this.$router.push('/')
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style></style>
+<style>
+</style>
