@@ -37,6 +37,9 @@
         :visible="showMedia"
         @close="closeMedia"
       />
+      <v-icon size="70" :class="`mr-2 icon-${file.format}`">
+        {{ getFormatIcon }}
+      </v-icon>
       <v-icon size="70" class="file-icon mr-2" @click="seeMedia">
         mdi-eye-outline
       </v-icon>
@@ -76,7 +79,21 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['role'])
+    ...mapGetters(['role']),
+    getFormatIcon() {
+      switch(this.file.format){
+        case 'xls':
+        case 'csv':
+          return 'mdi-file-excel-outline'
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'gif':
+          return 'mdi-image-outline'
+        default:
+          return 'mdi-file-document-outline'
+      }
+    }
   },
   methods: {
     seeMedia() {
@@ -113,7 +130,7 @@ export default {
     reload() {
       this.$emit('reload')
     },
-  },
+  }
 }
 </script>
 
@@ -130,5 +147,11 @@ export default {
 }
 .file-card:hover {
   background-color:#BBDEFB;
+}
+.icon-xls, .icon-csv {
+  color: lightgreen;
+}
+.icon-jpg, .icon-png, .icon-jpeg, .icon-gif {
+  color: rgb(209, 209, 19);
 }
 </style>
