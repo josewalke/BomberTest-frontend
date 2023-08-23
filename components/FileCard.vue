@@ -20,12 +20,22 @@
         </v-btn>
         <v-spacer />
       </v-card-actions>
-      <FileDialog :file="file" :visible="showDialog" @close="closeDialog" @reload="reload" />
+      <FileDialog
+        :file="file"
+        :visible="showDialog"
+        @close="closeDialog"
+        @reload="reload" 
+      />
       <DeleteFileAlert
         :id="file._id"
         :visible="showDelete"
         @close="closeDelete"
         @reload="reload"
+      />
+      <ShowMediaDialog
+        :file="file"
+        :visible="showMedia"
+        @close="closeMedia"
       />
       <v-icon size="70" class="file-icon mr-2" @click="seeMedia">
         mdi-eye-outline
@@ -45,6 +55,7 @@ import { mapGetters } from 'vuex'
 
 import FileDialog from './FileDialog.vue'
 import DeleteFileAlert from './DeleteFileAlert.vue'
+import ShowMediaDialog from './ShowMediaDialog.vue'
 
 export default {
   props: {
@@ -55,11 +66,13 @@ export default {
   components: {
     FileDialog,
     DeleteFileAlert,
+    ShowMediaDialog
   },
   data() {
     return {
       showDialog: false,
-      showDelete: false
+      showDelete: false,
+      showMedia: false
     }
   },
   computed: {
@@ -67,8 +80,7 @@ export default {
   },
   methods: {
     seeMedia() {
-      this.$store.commit('saveFile', this.file)
-      this.$router.push(`/downloads/${this.file._id}`)
+      this.showMedia = true
     },
     async downloadMedia(id) {
       const fileData = await this.$store.dispatch('seeMedia', id)
@@ -83,6 +95,9 @@ export default {
     },
     closeDialog() {
       this.showDialog = false
+    },
+    closeMedia() {
+      this.showMedia = false
     },
     openDelete() {
       this.showDelete = true
