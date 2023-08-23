@@ -84,10 +84,15 @@ export default {
     },
     async downloadMedia(id) {
       const fileData = await this.$store.dispatch('seeMedia', id)
+
       const response = await fetch(fileData.url)
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
+
+      const fileName = `${this.file.title}.${this.file.format}`
+
       this.$refs.downloadLink.href = url
+      this.$refs.downloadLink.download = fileName
       this.$refs.downloadLink.click()
     },
     editFile() {

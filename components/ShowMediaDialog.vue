@@ -12,6 +12,7 @@
 
         <v-card-text class="my-3">
           <img class="file-img" v-if="isImage" :src="mediaData.url" alt="Image stored in the cloud">
+          <span v-else>Previsualización no disponible</span>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -61,9 +62,9 @@ export default {
     background-color: #BBDEFB
   }
   .file-view {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .file-img {
     max-width: 100%;
