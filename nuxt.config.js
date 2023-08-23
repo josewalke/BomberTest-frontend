@@ -70,9 +70,6 @@ module.exports = {
     // publishableKey: 'pk_test_ezWwY83XHKU9CtONibdNYGXA00plca98gw'
   },
   cloudinary: {
-    cloudName: 'dcniczcdq',
-    api_key: '663893924416435',
-    api_secret: 'DexeevYnp1pwiQaHVzmtnp6ebxY',
     useComponent: true
   },
   /*
@@ -102,14 +99,14 @@ module.exports = {
      */
     extend(config, ctx) {
       // Run ESLint on save
-      // if (ctx.isDev && ctx.isClient) {
-      //   config.module.rules.push({
-      //     enforce: 'pre',
-      //     test: /\.(js|vue)$/,
-      //     loader: 'eslint-loader',
-      //     exclude: /(node_modules)/
-      //   })
-      // }
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
     }
   }
 }
