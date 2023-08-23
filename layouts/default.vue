@@ -140,7 +140,8 @@
           <v-list-item v-for="item in admin" :key="item.title">
             <v-list-item-content>
               <v-btn text class="justify-start" color="#6b6b6b" :to="item.page">
-                <v-icon class="mr-2">{{ item.icon }}</v-icon> {{ item.title }}
+                <v-icon class="mr-2">{{ item.icon }}</v-icon>
+                {{ item.title }}
               </v-btn>
             </v-list-item-content>
           </v-list-item>
@@ -173,14 +174,13 @@ export default {
         { title: 'Test', icon: 'mdi-ballot', page: '/tests' },
         { title: 'Temario', icon: 'mdi-file-pdf-box', page: '/temario' },
         { title: 'Videos', icon: 'mdi-video-box', page: '/videos' },
-        { title: 'Descargas', icon: 'mdi-folder-download', page: '/descargas' },
+        { title: 'Descargas', icon: 'mdi-folder-download', page: '/downloads' },
         { title: 'Mensajes', icon: 'mdi-email', page: '/message' },
         {
           title: 'Clasificatoria',
           icon: 'mdi-playlist-star',
           page: '/clasificacion',
         },
-        ,
         { title: 'Configuración', icon: 'mdi-cogs', page: '/settings' },
       ],
       admin: [
@@ -221,7 +221,7 @@ export default {
       this.$store.commit('clearToken')
       this.$router.push('/')
     },
-  },
+  }
 }
 </script>
 
