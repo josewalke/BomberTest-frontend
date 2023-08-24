@@ -102,6 +102,8 @@ export default {
     async downloadMedia(id) {
       const fileData = await this.$store.dispatch('seeMedia', id)
 
+      fileData.url = this.convertToHttps(fileData.url)
+      
       const response = await fetch(fileData.url)
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
@@ -111,6 +113,12 @@ export default {
       this.$refs.downloadLink.href = url
       this.$refs.downloadLink.download = fileName
       this.$refs.downloadLink.click()
+    },
+    convertToHttps(url) {
+      if (url.startsWith("http://")) {
+          return url.replace("http://", "https://");
+      }
+      return url;
     },
     editFile() {
       this.showDialog = true
