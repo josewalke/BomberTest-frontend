@@ -172,7 +172,7 @@ export default {
       items: [
         { title: 'Perfil', icon: 'mdi-account', page: '/user' },
         { title: 'Test', icon: 'mdi-ballot', page: '/tests' },
-        { title: 'Temario', icon: 'mdi-file-pdf-box', page: '/temario' },
+        { title: 'Temario', icon: 'mdi-file-pdf-box', page: '/topics' },
         { title: 'Videos', icon: 'mdi-video-box', page: '/videos' },
         { title: 'Descargas', icon: 'mdi-folder-download', page: '/downloads' },
         { title: 'Mensajes', icon: 'mdi-email', page: '/message' },
@@ -186,7 +186,7 @@ export default {
       admin: [
         { title: 'Alumnos', icon: 'mdi-account', page: '/dashboard' },
         { title: 'Temas', icon: 'mdi-book-open', page: '/temas' },
-        { title: 'PDF', icon: 'mdi-file-pdf-box', page: '/topics' },
+        { title: 'Temario PDF', icon: 'mdi-file-pdf-box', page: '/topics' },
         { title: 'Videos', icon: 'mdi-video-box', page: '/videos' },
         { title: 'Descargas', icon: 'mdi-folder-download', page: '/downloads' },
         { title: 'Mensajes', icon: 'mdi-email', page: '/message' },
