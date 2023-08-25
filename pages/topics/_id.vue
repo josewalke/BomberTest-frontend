@@ -42,7 +42,6 @@ import { mapGetters } from 'vuex'
       this.mediaData = await this.$store.dispatch('seeMedia', this.file._id)
       this.mediaData.secure_url = this.mediaData.secure_url.replace(/\.pdf$/, '.png')
       for (let i = 1; i <= this.file.pages; i++) {
-        console.log(this.mediaData.secure_url.replace('/image/upload/', `$&pg_${i}/`))
         this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&pg_${i}/`))
       }
     } 
