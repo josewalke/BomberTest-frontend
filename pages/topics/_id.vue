@@ -66,6 +66,9 @@ import { mapGetters } from 'vuex'
 .file-title {
   justify-content: center;
 }
+.file-img {
+  width: 80vw;
+}
 .go-back {
   display: flex;
   flex-direction: column-reverse;
