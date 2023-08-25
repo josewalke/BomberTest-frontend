@@ -41,8 +41,10 @@ import { mapGetters } from 'vuex'
     async created() {
       this.mediaData = await this.$store.dispatch('seeMedia', this.file._id)
       this.mediaData.secure_url = this.mediaData.secure_url.replace(/\.pdf$/, '.png')
-      for (let i = 1; i <= this.file.pages; i++) {
-        this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&pg_${i}/`))
+      if (this.file.pages) {
+        for (let i = 1; i <= this.file.pages; i++) {
+          this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&pg_${i}/`))
+        }
       }
     } 
   }
