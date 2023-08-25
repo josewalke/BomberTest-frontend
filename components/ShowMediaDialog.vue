@@ -10,7 +10,7 @@
           </v-icon>
         </v-card-title>
 
-        <v-card-text class="my-3">
+        <v-card-text class="my-3 img-container">
           <img class="file-img" v-if="isImage" :src="mediaData.url" alt="Image stored in the cloud">
           <span v-else>Previsualización no disponible</span>
         </v-card-text>
@@ -70,5 +70,9 @@ export default {
     max-width: 100%;
     max-height: 100%;  
     object-fit: contain;
+  }
+  .img-container{
+    display: flex;
+    justify-content: center;
   }
 </style>
