@@ -1,7 +1,7 @@
 <template>
   <div class="file-container">
     <h1 class="file-info file-title my-10 px-5 py-5 text-center" >{{ file.title }}</h1>
-    <img v-for="(page, idx) in mediaData" :key="idx" class="file-img" :src="page.secure_url" alt="Image stored in the cloud">
+    <img v-for="(page, idx) in pages" :key="idx" class="file-img" :src="page" alt="Topic content">
     <div class="file-info my-10 px-5 py-5">
       <div>
         <h2> Categoría: {{ file.topic.category }}</h2>
@@ -25,7 +25,7 @@ import { mapGetters } from 'vuex'
     data() {
       return {
         mediaData: {},
-        pdfURL: '',
+        pages: []
       }
     },
     methods: {
@@ -40,6 +40,11 @@ import { mapGetters } from 'vuex'
     },
     async created() {
       this.mediaData = await this.$store.dispatch('seeMedia', this.file._id)
+      this.mediaData.secure_url = this.mediaData.secure_url.replace(/\.pdf$/, '.png')
+      for (let i = 1; i <= this.file.pages; i++) {
+        console.log(this.mediaData.secure_url.replace('/image/upload/', `$&pg_${i}/`))
+        this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&pg_${i}/`))
+      }
     } 
   }
 </script>

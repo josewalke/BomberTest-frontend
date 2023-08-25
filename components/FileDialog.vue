@@ -24,7 +24,12 @@
           </v-col>
           <v-col cols="12" v-if="!file">
             <div class="text-center">
-              <input type="file" @change="selectFile" class="download-btn">
+              <input
+                type="file"
+                @change="selectFile"
+                class="download-btn"
+                ref="fileInput"
+              >
             </div>
           </v-col>
           
@@ -90,6 +95,7 @@ export default {
         this.file.topic.category = topic.category
       } else {
         await this.$store.dispatch('postFile', this.editedInfo)
+        this.$refs.fileInput.value = ""
       }
 
       this.$emit('reload')
