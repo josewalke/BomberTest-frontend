@@ -2,10 +2,15 @@
   <div>
     <v-expansion-panels>
       <v-expansion-panel v-for="(topic, idx) in filterTopics" :key="idx" >
-        <v-expansion-panel-header class="topic-title">
+        <v-expansion-panel-header
+          class="topic-title"
+          v-if="filterVideos(topic._id).length !== 0"
+        >
           <h3 class="font-weight-regular" >
             {{ topic.name }}
           </h3>
+          <v-spacer />
+          {{ filterVideos(topic._id).length }} Videos
         </v-expansion-panel-header>
         <v-expansion-panel-content
           class="video-card"
