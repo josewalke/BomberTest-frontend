@@ -74,4 +74,8 @@ import { mapGetters } from 'vuex'
   flex-direction: column-reverse;
   align-items: center;
 }
+.go-back:hover {
+  background-color: #1976d2;
+  border-radius: 10%;
+}
 </style>

@@ -16,7 +16,7 @@
         <v-divider></v-divider>
 
         <v-list v-if="role === 'cliente'" dense>
-          <v-list-item v-for="item in items" :key="item.title">
+          <v-list-item v-if="active" v-for="item in items" :key="item.title">
             <v-list-item-content>
               <v-btn text class="justify-start" color="#6b6b6b" :to="item.page">
                 <v-icon class="mr-2">{{ item.icon }}</v-icon
@@ -72,7 +72,7 @@
         <v-divider></v-divider>
 
         <v-list v-if="role === 'cliente'" dense>
-          <v-list-item v-for="item in items" :key="item.title">
+          <v-list-item v-if="active" v-for="item in items" :key="item.title">
             <v-list-item-content>
               <v-btn text class="justify-start" color="#6b6b6b" :to="item.page">
                 <v-icon class="mr-2">{{ item.icon }}</v-icon
@@ -119,7 +119,7 @@
         <v-divider></v-divider>
 
         <v-list v-if="role === 'cliente' || role === 'prueba'" dense>
-          <v-list-item v-for="item in items" :key="item.title">
+          <v-list-item v-if="active" v-for="item in items" :key="item.title">
             <v-list-item-content>
               <v-btn text class="justify-start" color="#6b6b6b" :to="item.page">
                 <v-icon class="mr-2">{{ item.icon }}</v-icon>
@@ -203,7 +203,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userName', 'image_url', 'role']),
+    ...mapGetters(['userName', 'image_url', 'role', 'active']),
   },
   methods: {
     resolucion() {
