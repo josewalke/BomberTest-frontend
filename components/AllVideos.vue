@@ -81,11 +81,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.video-item {
-  display: flex;
-}
-.new-video {
-  display: flex;
-  justify-content: center;
-}
+  .video-item {
+    display: flex;
+  }
+  .new-video {
+    display: flex;
+    justify-content: center;
+  }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="file-container">
     <h1 class="file-info file-title my-10 px-5 py-5 text-center" >{{ file.title }}</h1>
-    <img v-for="(page, idx) in pages" :key="idx" class="file-img" :src="page" alt="Topic content">
+    <img @contextmenu.prevent @dragstart.prevent v-for="(page, idx) in pages" :key="idx" class="file-img" :src="page" alt="Topic content">
     <div class="file-info my-10 px-5 py-5">
       <div>
         <h2> Categoría: {{ file.topic.category }}</h2>
@@ -43,7 +43,7 @@ import { mapGetters } from 'vuex'
       this.mediaData.secure_url = this.mediaData.secure_url.replace(/\.pdf$/, '.png')
       if (this.file.pages) {
         for (let i = 1; i <= this.file.pages; i++) {
-          this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&pg_${i}/`))
+          this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&l_watermark/pg_${i}/`))
         }
       }
     } 
