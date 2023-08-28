@@ -8,12 +8,14 @@
       </v-card>
       <VideoDialog :visible="showDialog" @close="closeDialog" @reload="getVideos" />
     </div>
-    <v-card v-for="(category, idx) in categories" :key="idx" class="my-5">
-      <div class="category-title primary white--text py-3 pl-5">
-        {{ category.toUpperCase() }}
-      </div>
-      <ExpansionPanel :category="category" :topics="topics" :videos="videos" @reload="getVideos" />
-    </v-card>
+    <div class="card-container">
+      <v-card v-for="(category, idx) in categories" :key="idx" class="my-5 category-card">
+        <div class="category-title primary white--text py-3 pl-5">
+          {{ category.toUpperCase() }}
+        </div>
+        <ExpansionPanel :category="category" :topics="topics" :videos="videos" @reload="getVideos" />
+      </v-card>
+    </div>
   </div>
 </template>
 
@@ -87,5 +89,17 @@ export default {
   .new-video {
     display: flex;
     justify-content: center;
+  }
+  @media (min-width: 600px) {
+    .card-container{
+      margin: auto;
+      width: 50vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .category-card {
+      width: 100%;
+    }
   }
 </style>
