@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>Vídeos</h1>
-    <div v-if="role === 'admin'" class="new-video">
-      <v-card class="new-video my-5 text-center py-5 m-auto" width= "100%" color="#DCEDC8">
+    <Header title="Vídeos"/>
+    <div v-if="role === 'admin'" class="new-video card-container">
+      <v-card class="category-container new-video my-5 text-center py-5 m-auto" width= "100%" color="#DCEDC8">
         <span class="text-h6 mr-10">Crear nuevo vídeo</span>
         <v-btn color="success" @click="createVideo"> Crear </v-btn>
       </v-card>
@@ -24,11 +24,13 @@ import { mapGetters } from 'vuex'
 
 import ExpansionPanel from './ExpansionPanel.vue'
 import VideoDialog from './VideoDialog.vue'
+import Header from './Header.vue'
 
 export default {
   components: {
     ExpansionPanel,
-    VideoDialog
+    VideoDialog,
+    Header
   },
   data() {
     return {

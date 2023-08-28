@@ -4,14 +4,14 @@
     <div class="grid-wrap mb-4">
       <div class="grid">
         <div style="height: 200px width: 200px background-color: #DEDEDE">
-          <Donut
+          <!-- <Donut
             class="donut"
-            stle="background-color:#DEDEDE"
+            style="background-color:#DEDEDE"
             :right="currentTest.testCheck.right"
             :wrong="currentTest.testCheck.wrong"
             :blank="currentTest.testCheck.blank"
             :total="currentTest.no_contestadas.length"
-          ></Donut>
+          ></Donut> -->
         </div>
       </div>
       <div class="grid display-2" style="background-color: #DEDEDE">
@@ -244,6 +244,13 @@ export default {
       this.$store.dispatch('explicacion', body)
 
       this.$router.push(`/tests/${sPaginaURL[4]}/verificar/${id}`)
+    }
+  },
+  beforeRouteLeave (to, from, next) {
+    if( to.path.includes(from.params.test) ) {
+      next('/tests')
+    } else {
+      next()
     }
   }
 }
