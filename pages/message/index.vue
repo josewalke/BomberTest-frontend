@@ -43,6 +43,7 @@
         <thead>
           <tr>
             <th class="text-left">Pregunta</th>
+            <th class="text-left">Alumno</th>
             <th class="text-left">Respondido</th>
             <th class="text-left">Tipo</th>
           </tr>
@@ -59,6 +60,13 @@
               style="max-width: 150px;"
             >
               {{ item.pregunta }}
+            </td>
+            <td
+              v-if="!item.respuesta_leida"
+              class="text-truncate"
+              style="max-width: 150px;"
+            >
+              {{item.user_id ? `${item.user_id.name} ${item.user_id.lastName}` : 'Sin nombre'}}
             </td>
             <td v-if="item.respuesta_leida === false">
               <v-icon>mdi-check</v-icon>

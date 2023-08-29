@@ -49,9 +49,9 @@
         </div>
       </v-card-text>
       <v-card-actions>
-        <a href="https://bombertest.netlify.app/reset_pass/"
-          >¿Ha olvidado la contraseña?</a
-        >
+        <nuxt-link to="/reset_pass">
+          ¿Ha olvidado la contraseña?
+        </nuxt-link>
         <v-spacer></v-spacer>
         <v-btn color="success" class="mr-4" @click="signup">Registrarse</v-btn>
       </v-card-actions>

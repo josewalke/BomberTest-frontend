@@ -6,7 +6,7 @@
           Borrar Archivo
         </v-card-title>
 
-        <v-card-text class="my-3">
+        <v-card-text class="my-3 py-0 d-flex align-center justify-center">
           Está seguro de que desea borrar este archivo?
         </v-card-text>
 

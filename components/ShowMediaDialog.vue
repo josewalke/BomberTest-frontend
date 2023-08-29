@@ -12,7 +12,7 @@
 
         <v-card-text class="my-3 img-container">
           <img class="file-img" v-if="isImage" :src="mediaData.url" alt="Image stored in the cloud">
-          <span v-else>Previsualización no disponible</span>
+          <span v-else class="my-3 py-0 d-flex align-center justify-center">Previsualización no disponible</span>
         </v-card-text>
       </v-card>
     </v-dialog>
