@@ -38,8 +38,21 @@
 
       <v-card-actions class="actions">
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="close"> Cancelar </v-btn>
-        <v-btn color="success" text @click="save"> Guardar </v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="close"
+        >
+          Cancelar
+        </v-btn>
+        <v-btn
+          color="success"
+          @click="save"
+          :disabled="checkValidation()"
+          :loading="loading"
+        >
+         Guardar
+         </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -64,7 +77,8 @@ export default {
         file: this.file ? this.file.cloudId : ''
       },
       topics: [],
-      topicNames: []
+      topicNames: [],
+      loading: false
     }
   },
   methods: {
@@ -85,6 +99,7 @@ export default {
       this.$emit('close')
     },
     async save() {
+      this.loading = true
       const topic = this.topics.filter(topic => topic.name === this.editedInfo.topic)[0]
       this.editedInfo.topic = topic._id
       if (this.file) {
@@ -97,12 +112,19 @@ export default {
         await this.$store.dispatch('postFile', this.editedInfo)
         this.$refs.fileInput.value = ""
       }
-
+      this.loading = false
       this.$emit('reload')
       this.$emit('close')
     },
     async selectFile(e) {
       this.editedInfo.file = e.target.files[0]
+    },
+    checkValidation() {
+      if (this.file) {
+        return this.editedInfo.title === '' || !this.editedInfo.topic
+      } else {
+        return this.editedInfo.title === '' || !this.editedInfo.topic || this.editedInfo.file === ''
+      }
     }
   },
   async created() {

@@ -14,8 +14,20 @@
 
         <v-card-actions class="actions">
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="close"> Cancelar </v-btn>
-          <v-btn color="red" text @click="deleteFile"> Borrar </v-btn>
+          <v-btn
+            color="primary"
+            text @click="close"
+          >
+            Cancelar
+          </v-btn>
+          <v-btn
+            color="red"
+            text
+            @click="deleteFile"
+            :loading="loading"
+          >
+            Borrar
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,13 +40,20 @@ export default {
     'visible',
     'id'
   ],
+  data() {
+    return {
+      loading: false
+    }
+  },
   methods: {
     close() {
       this.$emit('close')
     },
     async deleteFile() {
+      this.loading = true
       const id = this.id
       await this.$store.dispatch('deleteFile', id)
+      this.loading = false
       this.close()
       this.$emit('reload')
     }

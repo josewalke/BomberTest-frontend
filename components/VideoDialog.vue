@@ -35,8 +35,21 @@
 
       <v-card-actions class="actions">
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="close"> Cancelar </v-btn>
-        <v-btn color="success" text @click="save"> Guardar </v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="close"
+        >
+          Cancelar
+        </v-btn>
+        <v-btn
+          color="success"
+          @click="save"
+          :disabled="checkValidation()"
+          :loading="loading"
+        > 
+          Guardar
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -61,7 +74,8 @@ export default {
         url: this.video ? this.video.url : ''
       },
       topics: [],
-      topicNames: []
+      topicNames: [],
+      loading: false
     }
   },
   methods: {
@@ -82,6 +96,7 @@ export default {
       this.$emit('close')
     },
     async save() {
+      this.loading = true
       const topic = this.topics.filter(topic => topic.name === this.editedInfo.topic)[0]
       this.editedInfo.topic = topic._id
       if (this.video) {
@@ -94,8 +109,15 @@ export default {
         await this.$store.dispatch('createVideo', this.editedInfo)
         this.$emit('reload')
       }
-
+      this.loading = false
       this.$emit('close')
+    },
+    checkValidation() {
+      if (this.video) {
+        return this.editedInfo.title === '' || !this.editedInfo.topic
+      } else {
+        return this.editedInfo.title === '' || !this.editedInfo.topic || this.editedInfo.url === ''
+      }
     }
   },
   async created() {
