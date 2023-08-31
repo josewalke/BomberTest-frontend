@@ -247,7 +247,7 @@ export default {
     }
   },
   beforeRouteLeave (to, from, next) {
-    if( to.path.includes(from.params.test) ) {
+    if( to.path.includes(from.params.test) && !to.path.includes('/verificar/')) {
       next('/tests')
     } else {
       next()
