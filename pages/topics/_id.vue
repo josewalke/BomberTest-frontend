@@ -43,7 +43,7 @@ import { mapGetters } from 'vuex'
       this.mediaData.secure_url = this.mediaData.secure_url.replace(/\.pdf$/, '.png')
       if (this.file.pages) {
         for (let i = 1; i <= this.file.pages; i++) {
-          this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&/w_500,g_south_west,l_fire_watermark/pg_${i}/`))
+          this.pages.push(this.mediaData.secure_url.replace('/image/upload/', `$&/g_south_west,l_fire_watermark,w_1.2/pg_${i}/`))
         }
       }
     }
