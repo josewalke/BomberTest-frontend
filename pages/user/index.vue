@@ -28,12 +28,12 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-col md="10" offset="1">
+    <!-- <v-col md="10" offset="1">
       <v-alert type="error">
         Para el correcto funcionamiento de la pagina evite usar el Google
         Translate o seleccione la opcion "ingles"
       </v-alert>
-    </v-col>
+    </v-col> -->
 
     <v-row v-if="!active">
       <v-col v-if="formato != 'movil'" md="6" offset="3">
