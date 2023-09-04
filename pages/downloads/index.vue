@@ -6,7 +6,7 @@
         <span class="text-h6 mr-10">Subir nuevo archivo</span>
         <v-btn color="success" @click="createFile"> Crear </v-btn>
       </v-card>
-      <FileDialog :visible="showDialog" @close="closeDialog" @reload="getFiles" />
+      <FileDialog :visible="showDialog" @close="closeDialog" @reload="getFiles" :aux="true"/>
     </div>
     <div class="card-container">
       <v-card v-for="(category, idx) in categories" :key="idx" class="my-5 category-card">
@@ -49,7 +49,7 @@ export default {
         setTimeout(() => this.getFiles(), 100);  // retry in 100ms
         return;
       }
-      const files = await this.$store.dispatch('getAllDownloads')
+      const files = await this.$store.dispatch('getAllAuxFiles')
       this.files = files
     },
     async getTopics() {

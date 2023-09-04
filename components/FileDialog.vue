@@ -67,6 +67,10 @@ export default {
     },
     file: {
       type: Object
+    },
+    aux: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -74,7 +78,8 @@ export default {
       editedInfo: {
         title: this.file ? this.file.title : '',
         topic: this.file ? this.file.topic.name : this.topics,
-        file: this.file ? this.file.cloudId : ''
+        file: this.file ? this.file.cloudId : '',
+        auxiliary: this.aux
       },
       topics: [],
       topicNames: [],
@@ -87,13 +92,15 @@ export default {
         this.editedInfo = {
           title: this.file.title,
           topic: this.file.topic.name,
-          file: this.file.cloudId
+          file: this.file.cloudId,
+          auxiliary: this.aux
         }
       } else {
         this.editedInfo = {
           title: '',
           topic: this.topicNames[0],
-          file: ''
+          file: '',
+          auxiliary: this.aux
         }
       }
       this.$emit('close')
@@ -109,6 +116,7 @@ export default {
         this.file.topic.name = topic.name
         this.file.topic.category = topic.category
       } else {
+        console.log(this.editedInfo)
         await this.$store.dispatch('postFile', this.editedInfo)
         this.$refs.fileInput.value = ""
       }

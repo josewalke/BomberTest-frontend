@@ -455,6 +455,14 @@ export default {
     const result = await axios.get('file/pdf', { headers: { token } })
     return result.data
   },
+  async getAllTopicPDF(token) {
+    const result = await axios.get('file/topics', { headers: { token } })
+    return result.data
+  },
+  async getAllAuxFiles(token) {
+    const result = await axios.get('file/aux', { headers: { token } })
+    return result.data
+  },
   async getAllDownloads(token) {
     const result = await axios.get('file/downloads', { headers: { token } })
     return result.data

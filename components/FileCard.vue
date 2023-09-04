@@ -23,6 +23,7 @@
       <FileDialog
         :file="file"
         :visible="showDialog"
+        :aux="true"
         @close="closeDialog"
         @reload="reload" 
       />
@@ -84,12 +85,15 @@ export default {
       switch(this.file.format){
         case 'xls':
         case 'csv':
+        case 'xlsx':
           return 'mdi-file-excel-outline'
         case 'jpg':
         case 'jpeg':
         case 'png':
         case 'gif':
           return 'mdi-image-outline'
+        case 'pdf':
+          return 'mdi-file-pdf-box'
         default:
           return 'mdi-file-document-outline'
       }
@@ -102,23 +106,25 @@ export default {
     async downloadMedia(id) {
       const fileData = await this.$store.dispatch('seeMedia', id)
 
-      fileData.url = this.convertToHttps(fileData.url)
+      //if(this.file.format === 'pdf') {
+        //fileData.secure_url = fileData.secure_url.replace(/\.pdf$/, '.png')
+      //}
       
-      const response = await fetch(fileData.url)
+      const response = await fetch(fileData.secure_url)
+      
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
 
-      const fileName = `${this.file.title}.${this.file.format}`
+      let fileName
+      if (this.file.format !== 'pdf') {
+        fileName = `${this.file.title}.${this.file.format}`
+      } else {
+        fileName = `${this.file.title}.pdf`
+      }
 
       this.$refs.downloadLink.href = url
       this.$refs.downloadLink.download = fileName
       this.$refs.downloadLink.click()
-    },
-    convertToHttps(url) {
-      if (url.startsWith("http://")) {
-          return url.replace("http://", "https://");
-      }
-      return url;
     },
     editFile() {
       this.showDialog = true
@@ -156,10 +162,13 @@ export default {
 .file-card:hover {
   background-color:#BBDEFB;
 }
-.icon-xls, .icon-csv {
+.icon-xls, .icon-csv, .icon-xlsx {
   color: lightgreen;
 }
 .icon-jpg, .icon-png, .icon-jpeg, .icon-gif {
   color: rgb(209, 209, 19);
+}
+.icon-pdf {
+  color: red;
 }
 </style>

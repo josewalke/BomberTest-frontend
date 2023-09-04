@@ -49,7 +49,7 @@ export default {
         setTimeout(() => this.getFiles(), 100);  // retry in 100ms
         return;
       }
-      const files = await this.$store.dispatch('getAllPDF')
+      const files = await this.$store.dispatch('getAllTopicPDF')
       this.files = files
     },
     async getTopics() {

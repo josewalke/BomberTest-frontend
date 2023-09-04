@@ -723,6 +723,12 @@ export const actions = {
   async getAllPDF(ctx) {
     return await API.getAllPDF(ctx.getters.token)
   },
+  async getAllTopicPDF(ctx) {
+    return await API.getAllTopicPDF(ctx.getters.token)
+  },
+  async getAllAuxFiles(ctx) {
+    return await API.getAllAuxFiles(ctx.getters.token)
+  },
   async getAllDownloads(ctx) {
     return await API.getAllDownloads(ctx.getters.token)
   },
