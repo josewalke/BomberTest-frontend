@@ -15,7 +15,7 @@
 
         <v-divider></v-divider>
 
-        <v-list v-if="role === 'cliente'" dense>
+        <v-list v-if="role === 'cliente' || role === 'prueba'" dense>
           <v-list-item v-if="active" v-for="item in items" :key="item.title">
             <v-list-item-content>
               <v-btn text class="justify-start" color="#6b6b6b" :to="item.page">
@@ -71,7 +71,7 @@
 
         <v-divider></v-divider>
 
-        <v-list v-if="role === 'cliente'" dense>
+        <v-list v-if="role === 'cliente' || role === 'prueba'" dense>
           <v-list-item v-if="active" v-for="item in items" :key="item.title">
             <v-list-item-content>
               <v-btn text class="justify-start" color="#6b6b6b" :to="item.page">
@@ -203,7 +203,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userName', 'image_url', 'role', 'active']),
+    ...mapGetters(['userId','userName', 'image_url', 'role', 'active', 'suscription_end_active']),
   },
   methods: {
     resolucion() {
@@ -221,6 +221,12 @@ export default {
       this.$store.commit('clearToken')
       this.$router.push('/')
     },
+  },
+  mounted() {
+    if (parseInt(this.suscription_end_active) + 86400000 < new Date().getTime()) {
+      this.$store.commit('changeActive', false)
+      this.$store.dispatch('updateUser', { active: false })
+    }
   }
 }
 </script>

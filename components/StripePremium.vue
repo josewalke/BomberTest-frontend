@@ -73,7 +73,7 @@ export default {
               }
             }
           )
-          console.log(result)
+          
           if (result.error) {
             return console.error(result.error)
           }
@@ -83,7 +83,7 @@ export default {
               active: true
             }
             this.$store.dispatch('suscription_end_active', body)
-            console.log('Transferencia Relealizada')
+            
           }
         } catch (e) {
           console.error(e)

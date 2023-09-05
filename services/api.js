@@ -487,5 +487,9 @@ export default {
   async deleteFile(id, token) {
     const result = await axios.delete(`file/${id}`, { headers: { token } })
     return result.data
+  },
+  async updateUser(body, id) {
+    const result = await axios.put(`users/${id}`, body)
+    return result.data
   }
 }

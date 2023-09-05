@@ -16,6 +16,7 @@ export const state = () => ({
   suspendidos: '',
   total: '',
   suscription_type: '',
+  suscription_end_active: '',
   active: '',
   tests: [],
   messages: [],
@@ -178,6 +179,9 @@ export const mutations = {
     state.negativos = negativos
     state.suscription_end_active = suscription_end_active
     state.provincia = provincia
+  },
+  changeActive(state, active) {
+    state.active = active
   },
   saveTests(state, tests) {
     let testById = []
@@ -744,8 +748,12 @@ export const actions = {
   async deleteFile(ctx, id) {
     return await API.deleteFile(id, ctx.getters.token)
   },
+  async updateUser(ctx, body) {
+    console.log(body)
+    return await API.updateUser(body, ctx.getters.userId)
+  },
   async prueba() {
     console.log('FUCK')
     // const currentTest = await API.getByTestId(.testId)
-  }
+  },
 }

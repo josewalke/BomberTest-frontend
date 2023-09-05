@@ -259,7 +259,6 @@ export default {
       }
     },
     change_active(idx) {
-      console.log(this.filter[idx]._id)
       const body = {
         id: this.filter[idx]._id,
         active: this.filter[idx].active,
