@@ -110,6 +110,7 @@ export default {
           auxiliary: this.aux
         }
       }
+      this.$refs.fileInput.value = ""
       this.error = false
       this.$emit('close')
     },
@@ -125,11 +126,11 @@ export default {
         this.file.topic.category = topic.category
       } else {
         const result = await this.$store.dispatch('postFile', this.editedInfo)
-        console.log(result)
         if( Object.hasOwn(result, 'error') ) {
           this.loading = false
           this.error = true
           this.errorMessage = result.error.message.message
+          return
         }
         this.$refs.fileInput.value = ""
       }
