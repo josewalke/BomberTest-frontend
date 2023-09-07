@@ -31,6 +31,11 @@
                 ref="fileInput"
               >
             </div>
+            <div class="text-center" v-if="error">
+              <span class="error-message">
+                {{ errorMessage }}
+              </span>
+            </div>
           </v-col>
           
         </v-container>
@@ -83,7 +88,9 @@ export default {
       },
       topics: [],
       topicNames: [],
-      loading: false
+      loading: false,
+      error: false,
+      errorMessage: ''
     }
   },
   methods: {
@@ -103,6 +110,7 @@ export default {
           auxiliary: this.aux
         }
       }
+      this.error = false
       this.$emit('close')
     },
     async save() {
@@ -116,8 +124,13 @@ export default {
         this.file.topic.name = topic.name
         this.file.topic.category = topic.category
       } else {
-        console.log(this.editedInfo)
-        await this.$store.dispatch('postFile', this.editedInfo)
+        const result = await this.$store.dispatch('postFile', this.editedInfo)
+        console.log(result)
+        if( Object.hasOwn(result, 'error') ) {
+          this.loading = false
+          this.error = true
+          this.errorMessage = result.error.message.message
+        }
         this.$refs.fileInput.value = ""
       }
       this.loading = false
@@ -155,5 +168,8 @@ export default {
 <style lang="scss" scoped>
   .actions {
     background-color: #BBDEFB
+  }
+  .error-message {
+    color: red;
   }
 </style>
