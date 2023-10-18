@@ -203,7 +203,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userId','userName', 'image_url', 'role', 'active', 'suscription_end_active']),
+    ...mapGetters(['userId','userName', 'image_url', 'role', 'active', 'suscription_end_active', 'token']),
   },
   methods: {
     resolucion() {
@@ -221,12 +221,20 @@ export default {
       this.$store.commit('clearToken')
       this.$router.push('/')
     },
+    redirectToHome() {
+      this.$router.push(`/`)
+    }
   },
   mounted() {
     if (parseInt(this.suscription_end_active) + 86400000 < new Date().getTime()) {
       this.$store.commit('changeActive', false)
       this.$store.dispatch('updateUser', { active: false })
     }
+
+    if (!this.token) {
+      this.redirectToHome()
+    }
+    
     window.addEventListener('beforeunload', () => {
       localStorage.clear()
     })
