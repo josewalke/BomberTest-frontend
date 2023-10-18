@@ -227,6 +227,9 @@ export default {
       this.$store.commit('changeActive', false)
       this.$store.dispatch('updateUser', { active: false })
     }
+    window.addEventListener('beforeunload', () => {
+      localStorage.clear()
+    })
   }
 }
 </script>
